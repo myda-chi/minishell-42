@@ -1,0 +1,113 @@
+Minishell Parser Implementation Steps
+====================================
+
+1. Initial Setup and Structure
+-----------------------------
+- Created parser.h with necessary structures and function declarations
+- Defined token types (WORD, PIPE, REDIR_IN, etc.)
+- Created t_token structure for storing token information
+- Created t_parser structure for managing parsing state
+
+2. Core Components Split
+-----------------------
+To keep files under 25 lines, split the parser into multiple focused files:
+
+a) parser.c
+   - Main tokenize function
+   - Orchestrates the overall parsing process
+   - Handles the main parsing loop
+   - Calls appropriate handlers for different token types
+
+b) token_utils.c
+   - Utility functions for token handling
+   - is_special_char: Identifies special characters
+   - get_special_token_type: Determines token type for special characters
+
+c) special_char_handler.c
+   - Handles special characters (>, <, |, etc.)
+   - Creates tokens for redirections and pipes
+   - Manages position updates for multi-character tokens
+
+d) word_handler.c
+   - Processes regular command words and arguments
+   - Extracts word content between spaces and special characters
+   - Creates WORD type tokens
+
+e) quote_handler.c
+   - Manages single and double quotes
+   - Extracts quoted content
+   - Handles nested quotes
+
+f) env_handler.c
+   - Processes environment variables ($VAR)
+   - Expands environment variables
+   - Handles special cases like $?
+
+3. Parsing Process Flow
+----------------------
+1. Input is received and parser is initialized
+2. Main tokenize function starts processing:
+   a) Skips whitespace
+   b) Checks for end of input
+   c) Processes tokens in order:
+      - Quotes (if present)
+      - Environment variables (if present)
+      - Special characters (if present)
+      - Regular words (if none of the above)
+
+4. Token Creation Process
+------------------------
+For each token type:
+1. Special Characters:
+   - Check if character is special
+   - Determine token type
+   - Create token with appropriate type
+   - Update parser position
+
+2. Regular Words:
+   - Find word boundaries
+   - Extract word content
+   - Create WORD token
+   - Update parser position
+
+3. Quotes:
+   - Identify quote type
+   - Find matching quote
+   - Extract quoted content
+   - Create appropriate token
+
+4. Environment Variables:
+   - Identify $ symbol
+   - Extract variable name
+   - Expand variable
+   - Create token with expanded value
+
+5. Error Handling
+----------------
+- Syntax error checking
+- Invalid token combinations
+- Unclosed quotes
+- Invalid environment variables
+
+6. Memory Management
+-------------------
+- Proper allocation for tokens
+- String duplication for token values
+- Cleanup of parser and tokens
+- Memory leak prevention
+
+7. Final Output
+--------------
+- Linked list of tokens
+- Each token contains:
+  * Type (WORD, PIPE, etc.)
+  * Value (actual string content)
+  * Next pointer (for linked list)
+
+This modular approach allows for:
+- Easy maintenance
+- Clear separation of concerns
+- Code reusability
+- Simplified testing
+- Better error handling
+- Compliance with 25-line file limit 
