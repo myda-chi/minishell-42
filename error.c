@@ -7,13 +7,13 @@ void print_syntax_error(char *error)
     ft_putstr_fd("\n", 2);
 }
 
-int check_syntax(t_token *tokens)
+int check_syntax(t_tokenizer *tokens)
 {
     t_token *current;
     int pipe_count;
     int redir_count;
 
-    current = tokens;
+    current = tokens->head;
     pipe_count = 0;
     redir_count = 0;
 
@@ -22,7 +22,7 @@ int check_syntax(t_token *tokens)
         if (current->type == PIPE)
         {
             pipe_count++;
-            if (!current->next || current->next->type == PIPE)
+            if (current->next && current->next->type == PIPE)
             {
                 print_syntax_error("syntax error near unexpected token '|'");
                 return (0);
@@ -39,12 +39,5 @@ int check_syntax(t_token *tokens)
         }
         current = current->next;
     }
-
-    if (pipe_count > 0 && redir_count == 0)
-    {
-        print_syntax_error("syntax error: pipe without redirection");
-        return (0);
-    }
-
     return (1);
 } 

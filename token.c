@@ -13,32 +13,36 @@ t_token *create_token(t_token_type type, char *value)
     return (token);
 }
 
-void add_token(t_token **tokens, t_token *new_token)
+void add_token(t_tokenizer *tokens, t_token *new_token)
 {
     t_token *current;
 
-    if (!*tokens)
+    if (!tokens)
+        return ;
+    if (!tokens->head)
     {
-        *tokens = new_token;
-        return;
+        tokens->head = new_token;
+        return ;
     }
-    current = *tokens;
+    current = tokens->head;
     while (current->next)
         current = current->next;
     current->next = new_token;
 }
 
-void free_tokens(t_token *tokens)
+void free_tokens(t_tokenizer *tokens)
 {
     t_token *current;
     t_token *next;
 
-    current = tokens;
+    if (!tokens)
+        return ;
+    current = tokens->head;
     while (current)
     {
         next = current->next;
-        free(current->value);
-        free(current);
+        if(current->value)
+            free(current);
         current = next;
     }
 } 

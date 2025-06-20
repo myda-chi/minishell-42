@@ -4,7 +4,8 @@ CFLAGS = -Wall -Wextra -Werror
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-SRCS = main.c parser.c parser_init.c token.c token_utils.c error.c quote_handler.c env_handler.c my_prompt.c\
+SRCS =	main.c lexer.c lexer_init.c token.c token_utils.c error.c quote_handler.c \
+		my_prompt.c parser.c
 
 OBJS = $(SRCS:.c=.o)
 
