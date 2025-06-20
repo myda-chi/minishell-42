@@ -1,9 +1,9 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
+# include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft/libft.h"
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
@@ -29,15 +29,8 @@ typedef struct s_out_redir
 	struct s_out_redir	*next;
 }   t_out_redir;
 
-typedef enum s_cmd_type
-{
-	COMMAND,
-	PIPES
-}   t_cmd_type;
-
 typedef struct s_command
 {
-	t_cmd_type          type;
 	t_in_redir          *in_redir;
 	t_out_redir         *out_redir;
 	char                **argv;
