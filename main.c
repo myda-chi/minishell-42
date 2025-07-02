@@ -1,6 +1,8 @@
 #include "minishell.h"
 #include "parser.h"
-#include "libft/libft.h"
+#include "executor.h"
+#include "utils.h"
+#include "signals.h"
 
 void print_tokens(t_tokenizer *tokens)
 {
@@ -20,63 +22,47 @@ void print_tokens(t_tokenizer *tokens)
     }
     printf("\n");
 }
-t_command *parse_command(char *input);
 
-int main(void)
+int main(int argc, char **argv, char **envp)
 {
     char *input;
     t_command *cmd;
+    t_shell_state *state;
+    int exit_status;
 
-    dig_prompt();
+    (void)argc;
+    (void)argv;
+    
+    /* Initialize shell state */
+    state = init_shell_state(envp);
+    if (!state)
+    {
+        ft_putstr_fd("minishell: failed to initialize shell state\n", 2);
+        return (1);
+    }
+    
+    setup_signals();
     while (1)
     {
         input = readline("🤖 minishell➤ ");
-        if (!input)
+        if (!input) // Ctrl+D
+        {
+            ft_putstr_fd("exit\n", 1);
             break;
-
+        }
         if (ft_strlen(input) > 0)
         {
             add_history(input);
-            cmd = parse_command(input);
-            if (!cmd)
+            cmd = parse_command(input, state);
+            if (cmd)
             {
-                free(input);
-                continue;
+                execute(cmd, state);
+                free_commands(cmd);
             }
-            
-            while (cmd)
-            {
-                if (cmd->type == PIPE)
-                {
-                    printf("This is a PIPE\n");
-                    cmd = cmd->next;
-                    printf("\n");
-                    continue;
-                }
-                int i = 0;
-                while (i < cmd->argc)
-                {
-                    printf("argv %d %s\n", i, cmd->argv[i]);
-                    i++;
-                }
-                printf("\n");
-                cmd = cmd->next;
-            }
-
-            // tokens = tokenize(tokenizer);
-            // if (tokens && check_syntax(tokens))
-            //     print_tokens(tokens);
-            // cmd_table = parse_commands(input);
-            // print_command_table(cmd_table);
-            // free_commands(cmd_table);
-            if (ft_strncmp(input, "exit", 4) == 0)
-                break;
-            // free_tokenizer(tokens);
-            // free(tokenizer);
         }
         free(input);
     }
-    // free_tokenizer(tokens);
-    // free(tokenizer);
-    return (0);
+    exit_status = get_exit_status_from_state(state);
+    cleanup_shell_state(state);
+    return (exit_status);
 }
