@@ -1,0 +1,25 @@
+# Object files
+obj/
+*.o
+
+# Executable
+minishell
+
+# Library files
+libft/libft.a
+
+# Temporary files
+output.txt
+*.tmp
+
+# Debug files
+*.dSYM/
+*.gdb_history
+
+# IDE files
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db

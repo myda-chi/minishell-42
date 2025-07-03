@@ -47,6 +47,7 @@ t_command *build_simple_command(t_token **current, t_shell_state *state)
 	t_command	*cmd;
 	int			argc;
 	int			i;
+	char		*unquoted;
 
 	if (!current || !*current)
 		return (NULL);
@@ -61,7 +62,14 @@ t_command *build_simple_command(t_token **current, t_shell_state *state)
 		{
 			char *expanded = expand_variables((*current)->value, state);
 			if (expanded)
-				cmd->argv[i++] = expanded;
+			{
+				unquoted = remove_quotes(expanded);
+				free(expanded);
+				if(unquoted)
+					cmd->argv[i++] = unquoted;
+				else
+					cmd->argv[i++] = ft_strdup((*current)->value);
+			}
 			else
 				cmd->argv[i++] = ft_strdup((*current)->value);
 		}

@@ -39,7 +39,8 @@ int			get_exit_status_from_state(t_shell_state *state);
 int		ft_str_is_numeric(char *str);
 
 /* Variable Expansion */
-char	*expand_variables(const char *str, t_shell_state *state);
+char	*expand_variables(char *str, t_shell_state *state);
+char *remove_quotes(const char *str);
 
 /* Prompt Functions */
 void	dig_prompt(void);

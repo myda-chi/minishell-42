@@ -1,5 +1,5 @@
 NAME = minishell
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 LDFLAGS = -L/mingw64/lib -lreadline
 CPPFLAGS = -I/mingw64/include -Iinclude

@@ -17,7 +17,6 @@ static char *expand_variable(const char *var_name, t_shell_state *state)
 	value = get_env_value_from_state(state, var_name);
 	if (value)
 		return (ft_strdup(value));
-	
 	return (ft_strdup(""));
 }
 
@@ -59,6 +58,7 @@ static char *expand_single_variable(const char *str, int start, int *new_len, t_
 		return (NULL);
 	
 	expanded = expand_variable(var_name, state);
+	// printf("hello: %d\n", (int)ft_strlen(expanded));
 	free(var_name);
 	
 	if (!expanded)
@@ -68,7 +68,7 @@ static char *expand_single_variable(const char *str, int start, int *new_len, t_
 	return (expanded);
 }
 
-char *expand_variables(const char *str, t_shell_state *state)
+char *expand_variables(char *str, t_shell_state *state)
 {
 	char *result;
 	char *temp;
@@ -78,7 +78,8 @@ char *expand_variables(const char *str, t_shell_state *state)
 
 	if (!str)
 		return (NULL);
-	
+	if (str[0] == '\'')
+		return (ft_strdup(str));
 	result = ft_strdup("");
 	if (!result)
 		return (NULL);
@@ -112,10 +113,49 @@ char *expand_variables(const char *str, t_shell_state *state)
 				free(temp);
 				result = expanded;
 				if (!result)
-					return (NULL);
+					return (NULL); 
 			}
 			i++;
 		}
 	}
 	return (result);
+}
+char *remove_quotes(const char *str)
+{
+    char *result;
+    int i;
+    int j;
+    int quote_char;
+    int in_dquotes;
+
+    if (!str)
+        return (NULL);
+
+    result = malloc(sizeof(char) * (strlen(str) + 1));
+    if (!result)
+        return (NULL);
+
+    i = 0;
+    j = 0;
+    in_dquotes = 0;
+    quote_char = 0;
+
+    while (str[i])
+    {
+        if (str[i] == '\'' && !in_dquotes)
+        {
+			quote_char = !quote_char;
+			i++;
+			continue;
+        }
+        else if (str[i] == '\"' && !quote_char)
+        {
+			in_dquotes = !in_dquotes;
+			i++;
+            continue;
+        }
+    	result[j++] = str[i++];
+    }
+    result[j] = '\0';
+    return (result);
 }
