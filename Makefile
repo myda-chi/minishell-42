@@ -1,18 +1,44 @@
 NAME = minishell
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 LDFLAGS = -L/mingw64/lib -lreadline
-CPPFLAGS = -I/mingw64/include
+CPPFLAGS = -I/mingw64/include -Iinclude
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-SRCS =	main.c lexer.c lexer_init.c token.c token_utils.c error.c quote_handler.c \
-		my_prompt.c parser.c executor.c utils.c signals.c \
-		builtins/ft_echo.c builtins/ft_cd.c builtins/ft_pwd.c \
-		builtins/ft_export.c builtins/ft_unset.c builtins/ft_env.c \
-		builtins/ft_exit.c
+# Source directories
+LEXER_DIR = src/lexer
+PARSER_DIR = src/parser
+EXECUTOR_DIR = src/executor
+BUILTINS_DIR = src/builtins
+UTILS_DIR = src/utils
+OBJ_DIR = obj
 
-OBJS = $(SRCS:.c=.o)
+# Source files
+LEXER_SRCS = $(LEXER_DIR)/lexer.c $(LEXER_DIR)/lexer_init.c $(LEXER_DIR)/token.c \
+			$(LEXER_DIR)/token_utils.c $(LEXER_DIR)/quote_handler.c
+
+PARSER_SRCS = $(PARSER_DIR)/parser_main.c $(PARSER_DIR)/parser_commands.c \
+			$(PARSER_DIR)/parser_redirections.c $(PARSER_DIR)/parser_pipeline.c \
+			$(PARSER_DIR)/parser_memory.c $(PARSER_DIR)/error.c
+
+EXECUTOR_SRCS = $(EXECUTOR_DIR)/executor_main.c $(EXECUTOR_DIR)/heredoc.c \
+				$(EXECUTOR_DIR)/redirections.c $(EXECUTOR_DIR)/builtin_check.c \
+				$(EXECUTOR_DIR)/builtin_exec.c $(EXECUTOR_DIR)/path_resolver.c \
+				$(EXECUTOR_DIR)/command_exec.c $(EXECUTOR_DIR)/external_exec.c \
+				$(EXECUTOR_DIR)/pipeline.c
+
+BUILTINS_SRCS = $(BUILTINS_DIR)/ft_echo.c $(BUILTINS_DIR)/ft_cd.c $(BUILTINS_DIR)/ft_pwd.c \
+				$(BUILTINS_DIR)/ft_export.c $(BUILTINS_DIR)/ft_unset.c $(BUILTINS_DIR)/ft_env.c \
+				$(BUILTINS_DIR)/ft_exit.c
+
+UTILS_SRCS = $(UTILS_DIR)/utils.c $(UTILS_DIR)/signals.c $(UTILS_DIR)/my_prompt.c \
+			$(UTILS_DIR)/env_hash.c $(UTILS_DIR)/env_manager.c $(UTILS_DIR)/expansion.c
+
+ALL_SRCS = main.c $(LEXER_SRCS) $(PARSER_SRCS) $(EXECUTOR_SRCS) $(BUILTINS_SRCS) $(UTILS_SRCS)
+
+# Object files
+OBJS = $(ALL_SRCS:%.c=$(OBJ_DIR)/%.o)
 
 all: $(LIBFT) $(NAME)
 
@@ -20,14 +46,15 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(OBJS) $(LDFLAGS) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LIBFT) -o $(NAME)
 
-%.o: %.c
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
-	rm -f $(OBJS)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean

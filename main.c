@@ -22,17 +22,25 @@ void print_tokens(t_tokenizer *tokens)
     }
     printf("\n");
 }
-t_command *parse_command(char *input);
 
 int main(int argc, char **argv, char **envp)
 {
     char *input;
     t_command *cmd;
-    char **my_envp;
+    t_shell_state *state;
+    int exit_status;
 
     (void)argc;
     (void)argv;
-    my_envp = copy_envp(envp);
+    
+    /* Initialize shell state */
+    state = init_shell_state(envp);
+    if (!state)
+    {
+        ft_putstr_fd("minishell: failed to initialize shell state\n", 2);
+        return (1);
+    }
+    
     setup_signals();
     while (1)
     {
@@ -45,15 +53,16 @@ int main(int argc, char **argv, char **envp)
         if (ft_strlen(input) > 0)
         {
             add_history(input);
-            cmd = parse_command(input);
+            cmd = parse_command(input, state);
             if (cmd)
             {
-                execute(cmd, &my_envp);
-                // free_commands(cmd);
+                execute(cmd, state);
+                free_commands(cmd);
             }
         }
         free(input);
     }
-    // free_envp(my_envp);
-    return (0);
+    exit_status = get_exit_status_from_state(state);
+    cleanup_shell_state(state);
+    return (exit_status);
 }

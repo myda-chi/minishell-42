@@ -95,17 +95,17 @@ char	**ft_split(char const *s, char c)
 	return (src);
 }
 
-#include <stdio.h>
+// #include <stdio.h>
 
-int	main(void)
-{
-	int i;
-	i=0;
-	char **strs=ft_split("5helloyoumy5", '5' );
-	while(strs[i])
-	{
-		printf("%s\n", strs[i]);
-		i++;
-	}
-	return (0);
-}
+// int	main(void)
+// {
+// 	int i;
+// 	i=0;
+// 	char **strs=ft_split("5helloyoumy5", '5' );
+// 	while(strs[i])
+// 	{
+// 		printf("%s\n", strs[i]);
+// 		i++;
+// 	}
+// 	return (0);
+// }
