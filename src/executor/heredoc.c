@@ -70,7 +70,10 @@ int handle_heredoc(char *delimiter, int index)
         return (-1);
     fd = create_temp_file(tmp_file);
     if (fd < 0)
+    {
+        free(tmp_file);
         return (-1);
+    }
     write_heredoc_content(fd, delimiter);
     close(fd);
     return (open_temp_for_reading(tmp_file));

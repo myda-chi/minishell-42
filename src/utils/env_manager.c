@@ -16,10 +16,8 @@ t_shell_state *init_shell_state(char **envp)
 		free(state);
 		return (NULL);
 	}
-	
 	state->exit_status = 0;
 	state->shell_pid = getpid();
-	
 	/* Set default shell variables */
 	set_env_value_in_state(state, "?", "0");
 	pid_str = ft_itoa(state->shell_pid);
@@ -28,7 +26,6 @@ t_shell_state *init_shell_state(char **envp)
 		set_env_value_in_state(state, "$", pid_str);
 		free(pid_str);
 	}
-	
 	return (state);
 }
 

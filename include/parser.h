@@ -78,5 +78,11 @@ void      		print_syntax_error(char *error);
 
 /* Prompt */
 void			dig_prompt(void);
+int is_operator(char c);
+int	skip_whitespace(t_tokenizer *tokens);
+int	is_quote_char(char c);
+int	is_word_char(char c);
+int	get_word_length(t_tokenizer *tokens);
+int	add_end_token(t_tokenizer *tokens);
 
 #endif 

@@ -16,7 +16,7 @@ OBJ_DIR = obj
 
 # Source files
 LEXER_SRCS = $(LEXER_DIR)/lexer.c $(LEXER_DIR)/lexer_init.c $(LEXER_DIR)/token.c \
-			$(LEXER_DIR)/token_utils.c $(LEXER_DIR)/quote_handler.c
+			$(LEXER_DIR)/token_utils.c $(LEXER_DIR)/quote_handler.c $(LEXER_DIR)/lexer_utils.c
 
 PARSER_SRCS = $(PARSER_DIR)/parser_main.c $(PARSER_DIR)/parser_commands.c \
 			$(PARSER_DIR)/parser_redirections.c $(PARSER_DIR)/parser_pipeline.c \

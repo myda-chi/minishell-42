@@ -23,3 +23,9 @@ t_token_type get_special_token_type(char c, char next)
     }
     return (WORD);
 }
+int is_operator(char c)
+{
+    return (c == '|' || c == '>' || c == '<' ||
+            c == ';' || c == '&' || c == '(' ||
+            c == ')');
+}

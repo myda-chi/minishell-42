@@ -34,9 +34,7 @@ t_command *build_commands(t_tokenizer *tokens, t_shell_state *state)
 	t_command	*tail;
 	t_command	*new_cmd;
 
-	if (!tokens || !tokens->head)
-		return (NULL);
-	if (!validate_pipeline_syntax(tokens->head))
+	if (!tokens || !tokens->head || !validate_pipeline_syntax(tokens->head))
 		return (NULL);
 	current = tokens->head;
 	head = build_simple_command(&current, state);
