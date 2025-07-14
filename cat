@@ -1,1 +1,0 @@
-cat infinite | bash Makefile README.md docs include libft main.c minishell obj src

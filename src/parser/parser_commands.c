@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_commands.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/13 19:20:08 by myda-chi          #+#    #+#             */
+/*   Updated: 2025/07/13 19:28:38 by myda-chi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 #include "utils.h"
 
 int	count_word_tokens(t_token *tokens)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (tokens && tokens->type != PIPE && tokens->type != END)
@@ -15,16 +27,16 @@ int	count_word_tokens(t_token *tokens)
 			tokens = tokens->next;
 			if (tokens && tokens->type == WORD)
 				tokens = tokens->next;
-			continue;
+			continue ;
 		}
 		tokens = tokens->next;
 	}
 	return (count);
 }
 
-t_command *init_command(int argc)
+t_command	*init_command(int argc)
 {
-	t_command *cmd;
+	t_command	*cmd;
 
 	cmd = ft_calloc(1, sizeof(t_command));
 	if (!cmd)
@@ -42,12 +54,10 @@ t_command *init_command(int argc)
 	return (cmd);
 }
 
-t_command *build_simple_command(t_token **current, t_shell_state *state)
+t_command	*build_simple_command(t_token **current, t_shell_state *state)
 {
 	t_command	*cmd;
 	int			argc;
-	int			i;
-	char		*unquoted;
 
 	if (!current || !*current)
 		return (NULL);
@@ -55,33 +65,55 @@ t_command *build_simple_command(t_token **current, t_shell_state *state)
 	cmd = init_command(argc);
 	if (!cmd)
 		return (NULL);
+	if (!populate_command_arguments(cmd, current, state))
+	{
+		free_command(cmd);
+		return (NULL);
+	}
+	return (cmd);
+}
+
+int	populate_command_arguments(t_command *cmd, t_token **current,
+		t_shell_state *state)
+{
+	int		i;
+
 	i = 0;
 	while (*current && (*current)->type != PIPE && (*current)->type != END)
 	{
 		if ((*current)->type == WORD)
 		{
-			char *expanded = expand_variables((*current)->value, state);
-			if (expanded)
-			{
-				unquoted = remove_quotes(expanded);
-				free(expanded);
-				if(unquoted)
-					cmd->argv[i++] = unquoted;
-				else
-					cmd->argv[i++] = ft_strdup((*current)->value);
-			}
-			else
-				cmd->argv[i++] = ft_strdup((*current)->value);
+			if (!process_word_token(cmd, &i, current, state))
+				return (0);
 		}
-		else if ((*current)->type >= REDIR_IN && (*current)->type <= REDIR_HEREDOC)
+		else if ((*current)->type >= REDIR_IN
+			&& (*current)->type <= REDIR_HEREDOC)
 		{
 			if (!add_redirection_to_command(cmd, current))
-			{
-				free_command(cmd);
-				return (NULL);
-			}
+				return (0);
 		}
 		*current = (*current)->next;
 	}
-	return (cmd);
+	return (1);
+}
+
+int	process_word_token(t_command *cmd, int *i, t_token **current,
+		t_shell_state *state)
+{
+	char	*expanded;
+	char	*unquoted;
+
+	expanded = expand_variables((*current)->value, state);
+	if (expanded)
+	{
+		unquoted = remove_quotes(expanded);
+		free(expanded);
+		if (unquoted)
+			cmd->argv[(*i)++] = unquoted;
+		else
+			cmd->argv[(*i)++] = ft_strdup((*current)->value);
+	}
+	else
+		cmd->argv[(*i)++] = ft_strdup((*current)->value);
+	return (1);
 }

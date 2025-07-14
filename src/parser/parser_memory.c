@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_memory.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/13 19:20:27 by myda-chi          #+#    #+#             */
+/*   Updated: 2025/07/13 19:20:29 by myda-chi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 static void	free_in_redirections(t_in_redir *redir)
@@ -58,4 +70,13 @@ void	free_commands(t_command *commands)
 		free_command(commands);
 		commands = next;
 	}
+}
+
+int	add_redirection_to_command(t_command *cmd, t_token **current)
+{
+	if ((*current)->type == REDIR_IN || (*current)->type == REDIR_HEREDOC)
+		return (handle_in_redirection_command(cmd, current));
+	else if ((*current)->type == REDIR_OUT || (*current)->type == REDIR_APPEND)
+		return (handle_out_redirection_command(cmd, current));
+	return (1);
 }

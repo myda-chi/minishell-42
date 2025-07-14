@@ -1,28 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expansion.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/13 18:04:41 by myda-chi          #+#    #+#             */
+/*   Updated: 2025/07/13 18:15:56 by myda-chi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "utils.h"
 
-static char *expand_variable(const char *var_name, t_shell_state *state)
+char	*expand_variable(const char *var_name, t_shell_state *state)
 {
-	char *value;
+	char	*value;
 
 	if (!var_name || !state)
 		return (ft_strdup(""));
-	
-	/* Handle special variables */
 	if (ft_strcmp(var_name, "?") == 0)
 		return (ft_itoa(get_exit_status_from_state(state)));
 	if (ft_strcmp(var_name, "$") == 0)
 		return (ft_itoa(state->shell_pid));
-	
-	/* Handle regular environment variables */
 	value = get_env_value_from_state(state, var_name);
 	if (value)
 		return (ft_strdup(value));
 	return (ft_strdup(""));
 }
 
-static char *extract_var_name(const char *str, int *len)
+char	*extract_var_name(const char *str, int *len)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str[i] == '{')
@@ -47,115 +55,60 @@ static char *extract_var_name(const char *str, int *len)
 	return (ft_strdup(""));
 }
 
-static char *expand_single_variable(const char *str, int start, int *new_len, t_shell_state *state)
+char	*expand_single_variable(const char *str, int start, int *new_len,
+		t_shell_state *state)
 {
-	char *var_name;
-	char *expanded;
-	int var_len;
+	char	*var_name;
+	char	*expanded;
+	int		var_len;
 
 	var_name = extract_var_name(str + start + 1, &var_len);
 	if (!var_name)
 		return (NULL);
-	
 	expanded = expand_variable(var_name, state);
-	// printf("hello: %d\n", (int)ft_strlen(expanded));
 	free(var_name);
-	
 	if (!expanded)
 		return (NULL);
-	
-	*new_len = var_len + 1; /* +1 for the $ */
+	*new_len = var_len + 1;
 	return (expanded);
 }
 
-char *expand_variables(char *str, t_shell_state *state)
+static int	process_quote_char(char c, int *i, int *in_dquote, int *in_squote)
 {
-	char *result;
-	char *temp;
-	char *expanded;
-	int i;
-	int var_len;
+	if ((c == '\'' && !(*in_dquote)) || (c == '\"' && !(*in_squote)))
+	{
+		if (c == '\'')
+			*in_squote = !(*in_squote);
+		else
+			*in_dquote = !(*in_dquote);
+		(*i)++;
+		return (1);
+	}
+	return (0);
+}
+
+char	*remove_quotes(const char *str)
+{
+	char	*result;
+	int		i;
+	int		j;
+	int		in_dquote;
+	int		in_squote;
 
 	if (!str)
 		return (NULL);
-	if (str[0] == '\'')
-		return (ft_strdup(str));
-	result = ft_strdup("");
+	result = malloc(sizeof(char) * (ft_strlen(str) + 1));
 	if (!result)
 		return (NULL);
-	
 	i = 0;
+	j = 0;
+	in_dquote = 0;
+	in_squote = 0;
 	while (str[i])
 	{
-		if (str[i] == '$' && str[i + 1] && 
-			(ft_isalnum(str[i + 1]) || str[i + 1] == '_' || 
-			 str[i + 1] == '?' || str[i + 1] == '{'))
-		{
-			expanded = expand_single_variable(str, i, &var_len, state);
-			if (expanded)
-			{
-				temp = ft_strjoin(result, expanded);
-				free(result);
-				free(expanded);
-				result = temp;
-				if (!result)
-					return (NULL);
-			}
-			i += var_len;
-		}
-		else
-		{
-			temp = ft_substr(str, i, 1);
-			if (temp)
-			{
-				expanded = ft_strjoin(result, temp);
-				free(result);
-				free(temp);
-				result = expanded;
-				if (!result)
-					return (NULL); 
-			}
-			i++;
-		}
+		if (!process_quote_char(str[i], &i, &in_dquote, &in_squote))
+			result[j++] = str[i++];
 	}
+	result[j] = '\0';
 	return (result);
-}
-char *remove_quotes(const char *str)
-{
-    char *result;
-    int i;
-    int j;
-    int quote_char;
-    int in_dquotes;
-
-    if (!str)
-        return (NULL);
-
-    result = malloc(sizeof(char) * (strlen(str) + 1));
-    if (!result)
-        return (NULL);
-
-    i = 0;
-    j = 0;
-    in_dquotes = 0;
-    quote_char = 0;
-
-    while (str[i])
-    {
-        if (str[i] == '\'' && !in_dquotes)
-        {
-			quote_char = !quote_char;
-			i++;
-			continue;
-        }
-        else if (str[i] == '\"' && !quote_char)
-        {
-			in_dquotes = !in_dquotes;
-			i++;
-            continue;
-        }
-    	result[j++] = str[i++];
-    }
-    result[j] = '\0';
-    return (result);
 }

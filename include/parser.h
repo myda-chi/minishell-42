@@ -72,11 +72,25 @@ int				handle_quotes(t_tokenizer *tokens);
 int				is_special_char(char c);
 t_token 		*handle_special_char(t_tokenizer *tokens);
 t_token 		*handle_regular_word(t_tokenizer *tokens);
-
+t_in_redir *create_in_redirection(t_token **current);
+int	handle_out_redirection_command(t_command *cmd, t_token **current);
+int	handle_in_redirection_command(t_command *cmd, t_token **current);
 /* Error Handling */
 void      		print_syntax_error(char *error);
-
+int populate_command_arguments(t_command *cmd, t_token **current, t_shell_state *state);
+int process_word_token(t_command *cmd, int *i, t_token **current, t_shell_state *state);
+t_command *build_command_list(t_token *tokens, t_shell_state *state);
 /* Prompt */
 void			dig_prompt(void);
-
+int	is_word_char(char c);
+int	skip_whitespace(t_tokenizer *tokens);
+int	is_operator(char c);
+int	handle_single_quote(t_tokenizer *tokens, int start);
+int	handle_double_quote(t_tokenizer *tokens, int start);
+int	add_end_token(t_tokenizer *tokens);
+int	process_token(t_tokenizer *tokens);
+char	*extract_special_token_value(t_tokenizer *tokens, int len);
+int	get_word_length(t_tokenizer *tokens);
+int	is_quote_char(char c);
+int	is_wrd_char(char c);
 #endif 

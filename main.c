@@ -4,25 +4,30 @@
 #include "utils.h"
 #include "signals.h"
 
-void print_tokens(t_tokenizer *tokens)
+void increment_shell_level(t_shell_state *state)
 {
-    t_token *current = tokens->head;
-    const char *type_str[] = {
-        "WORD", "PIPE", "REDIR_IN", "REDIR_OUT",
-        "REDIR_APPEND", "REDIR_HEREDOC",
-        "SINGLE_QUOTE", "DOUBLE_QUOTE", "DOLLAR", "END"};
+    char *current_level;
+    char *new_level_str;
+    int current_level_int;
+    int new_level;
 
-    printf("Tokens:\n");
-    while (current)
+    if (!state)
+        return;
+    
+    current_level = get_env_value_from_state(state, "SHLVL");
+    if (!current_level)
+        current_level_int = 0;
+    else
+        current_level_int = ft_atoi(current_level);
+    
+    new_level = current_level_int + 1;
+    new_level_str = ft_itoa(new_level);
+    if (new_level_str)
     {
-        printf("Type: %-15s Value: %s\n",
-               type_str[current->type],
-               current->value);
-        current = current->next;
-    }
-    printf("\n");
+        set_env_value_in_state(state, "SHLVL", new_level_str);
+        free(new_level_str);
+    } 
 }
-
 int main(int argc, char **argv, char **envp)
 {
     char *input;
@@ -35,6 +40,7 @@ int main(int argc, char **argv, char **envp)
     
     /* Initialize shell state */
     state = init_shell_state(envp);
+    increment_shell_level(state);
     if (!state)
     {
         ft_putstr_fd("minishell: failed to initialize shell state\n", 2);

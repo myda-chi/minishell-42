@@ -44,5 +44,15 @@ char *remove_quotes(const char *str);
 
 /* Prompt Functions */
 void	dig_prompt(void);
-
+void fill_env_array(t_env_table *table, char **envp);
+unsigned int hash_function(const char *key);
+int count_env_var(t_env_table *table);
+char *expand_single_variable(const char *str, int start, int *new_len, t_shell_state *state);
+char *extract_var_name(const char *str, int *len);
+char *expand_variable(const char *var_name, t_shell_state *state);
+int	env_update(t_env_var *current, const char *value);
+t_env_var	*find_env_var(t_env_table *table, const char *key, t_env_var **prev);
+int	update_existing_var(t_env_var *current, const char *value);
+t_env_var	*add_new_var(t_env_table *table, const char *key, const char *value, unsigned int index);
+t_env_var	*create_env_var(const char *key, const char *value);
 #endif
