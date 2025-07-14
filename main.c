@@ -37,8 +37,7 @@ int main(int argc, char **argv, char **envp)
 
     (void)argc;
     (void)argv;
-    
-    /* Initialize shell state */
+
     state = init_shell_state(envp);
     increment_shell_level(state);
     if (!state)
@@ -51,7 +50,7 @@ int main(int argc, char **argv, char **envp)
     while (1)
     {
         input = readline("🤖 minishell➤ ");
-        if (!input) // Ctrl+D
+        if (!input)
         {
             ft_putstr_fd("exit\n", 1);
             break;

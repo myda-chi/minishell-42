@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 19:20:08 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/13 19:28:38 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/14 20:54:57 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	populate_command_arguments(t_command *cmd, t_token **current,
 		else if ((*current)->type >= REDIR_IN
 			&& (*current)->type <= REDIR_HEREDOC)
 		{
-			if (!add_redirection_to_command(cmd, current))
+			if (!add_redirection_to_command(cmd, current, state))
 				return (0);
 		}
 		*current = (*current)->next;

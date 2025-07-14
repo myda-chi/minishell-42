@@ -55,7 +55,7 @@ t_command		*init_command(int argc);
 /* Redirection Handling */
 t_in_redir		*handle_in_redirection(t_token **current);
 t_out_redir		*handle_out_redirection(t_token **current);
-int				add_redirection_to_command(t_command *cmd, t_token **current);
+int				add_redirection_to_command(t_command *cmd, t_token **current, t_shell_state *state);
 
 /* Pipeline Functions */
 int				validate_pipeline_syntax(t_token *tokens);

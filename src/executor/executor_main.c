@@ -23,7 +23,7 @@ static void handle_single_builtin(t_command *commands, t_shell_state *state)
 
 static int is_single_builtin_command(t_command *commands)
 {
-    if (is_single_command(commands) && is_builtin(commands->argv[0]))
+    if (is_single_command(commands) && commands->argv && is_builtin(commands->argv[0]))
         return (1);
     return (0);
 }
@@ -31,7 +31,7 @@ static int is_single_builtin_command(t_command *commands)
 void execute(t_command *commands, t_shell_state *state)
 {
     if (!commands)
-        return;
+        return ;
     if (is_single_builtin_command(commands))
     {
         handle_single_builtin(commands, state);

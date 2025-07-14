@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 19:20:42 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/14 16:56:17 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/14 20:54:14 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ t_in_redir	*handle_in_redirection(t_token **current)
 	t_in_redir	*redir;
 
 	redir = create_in_redirection(current);
+
 	if (!redir)
 		return (NULL);
 	if (redir->in_mode == 1)
-		redir->delimeter = ft_strdup((*current)->value);// do a count for all the delimeter
+		redir->delimeter = ft_strdup((*current)->value);
 	else
 		redir->in_file = ft_strdup((*current)->value);
 	if ((redir->in_mode == 1 && !redir->delimeter) || (redir->in_mode == 0

@@ -8,6 +8,11 @@ static void handle_child_process(t_command *cmd, t_shell_state *state)
 
     if (handle_redirections(cmd) == -1)
         exit(1);
+    if (!cmd->argv)
+    {
+        status = 0;
+        exit(status);
+    }
     if (is_builtin(cmd->argv[0]))
     {
         status = execute_builtin(cmd, state);
@@ -45,7 +50,7 @@ void execute_simple_command(t_command *cmd, t_shell_state *state)
     if (pid == -1)
     {
         set_exit_status_in_state(state, 1);
-        return;
+        return ;
     }
     if (pid == 0)
         handle_child_process(cmd, state);
