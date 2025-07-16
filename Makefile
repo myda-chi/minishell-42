@@ -1,10 +1,12 @@
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
-LDFLAGS = -L/mingw64/lib -lreadline
-CPPFLAGS = -I/mingw64/include -Iinclude
+CFLAGS = -Wall -Wextra -Werror -I$(INCLUDE)
 LIBFT_DIR = libft
+INCLUDE = include
+READLINE_DIR = include/mac
 LIBFT = $(LIBFT_DIR)/libft.a
+READLINE = $(READLINE_DIR)/libreadline.a
+HISTORY = $(READLINE_DIR)/libhistory.a
 
 # Source directories
 LEXER_DIR = src/lexer
@@ -47,11 +49,11 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS)  -lcurses $(HISTORY) $(READLINE) $(LIBFT) -o $(NAME)
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean

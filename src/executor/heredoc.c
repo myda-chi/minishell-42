@@ -20,6 +20,8 @@ static void write_heredoc_content(int fd, char *delimiter)
 {
     char *line;
 
+    // setup_heredoc_signals();
+
     while (1)
     {
         line = readline("> ");

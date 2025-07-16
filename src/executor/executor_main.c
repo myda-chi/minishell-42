@@ -32,6 +32,7 @@ void execute(t_command *commands, t_shell_state *state)
 {
     if (!commands)
         return ;
+    set_signal_handler();
     if (is_single_builtin_command(commands))
     {
         handle_single_builtin(commands, state);

@@ -4,6 +4,8 @@
 #include "utils.h"
 #include "signals.h"
 
+volatile sig_atomic_t g_signal_received = 0;
+
 void increment_shell_level(t_shell_state *state)
 {
     char *current_level;
