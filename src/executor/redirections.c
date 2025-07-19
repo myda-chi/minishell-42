@@ -24,7 +24,7 @@ static int process_input_redirection(t_in_redir *in)
 		else
 			in->in_fd = 0;
 		if (in->in_fd < 0)
-			return (perror("open"), -1);
+			return (-1);
 		if (in->next == NULL)
 			break ;
 		close(in->in_fd);

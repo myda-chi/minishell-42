@@ -50,7 +50,11 @@ static void wait_for_all_children(t_shell_state *state)
         if (WIFEXITED(status))
             set_exit_status_in_state(state, WEXITSTATUS(status));
         else if (WIFSIGNALED(status))
+        {
+            if (WTERMSIG(status) == SIGINT)
+                ft_putstr_fd("\n", 1);
             set_exit_status_in_state(state, 128 + WTERMSIG(status));
+        }
     }
 }
 
@@ -63,6 +67,7 @@ void execute_pipeline(t_command *commands, t_shell_state *state)
 
     in_fd = 0;
     current = commands;
+    init_signals_parent();
     while (current)
     {
         if (create_pipe_if_needed(current, fd) == -1)
@@ -78,7 +83,8 @@ void execute_pipeline(t_command *commands, t_shell_state *state)
             return;
         }
         if (pid == 0)
-        {
+        {   
+            init_signals_child();
             setup_child_pipes(in_fd, fd, current);
             execute_simple_command(current, state);
             exit(get_exit_status_from_state(state));
@@ -87,4 +93,5 @@ void execute_pipeline(t_command *commands, t_shell_state *state)
         current = current->next;
     }
     wait_for_all_children(state);
+    init_signals();
 }

@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 19:46:01 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/13 20:14:55 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/19 23:11:34 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*extract_quoted_content(t_tokenizer *tokens, int start, int end)
 	int		len;
 
 	len = end - start;
-	content = ft_substr(tokens->input, start, len);
+	content = ft_substr(tokens->input, start, len - 1);
 	return (content);
 }
 

@@ -45,7 +45,10 @@ void	cleanup_shell_state(t_shell_state *state)
 	if (!state)
 		return ;
 	if (state->env_table)
+	{
 		free_env_table(state->env_table);
+		rl_clear_history();
+	}
 	free(state);
 }
 

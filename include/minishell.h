@@ -25,8 +25,6 @@
 /* Project Libraries */
 # include "../libft/libft.h"
 
-volatile sig_atomic_t g_signal_received;
-
 /* Forward Declarations */
 typedef struct s_env_var t_env_var;
 typedef struct s_env_table t_env_table;
@@ -80,7 +78,9 @@ void		free_commands(t_command *commands);
 /* Shell State Management */
 t_shell_state	*init_shell_state(char **envp);
 void			cleanup_shell_state(t_shell_state *state);
-void    		setup_signals(void);
-void    		set_signal_handler();
+void			init_signals(void);
+void			init_signals_child(void);
+void			init_signals_parent(void);
+void			disable_echoctl(void);
 
 #endif

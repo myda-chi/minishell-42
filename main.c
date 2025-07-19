@@ -2,9 +2,6 @@
 #include "parser.h"
 #include "executor.h"
 #include "utils.h"
-#include "signals.h"
-
-volatile sig_atomic_t g_signal_received = 0;
 
 void increment_shell_level(t_shell_state *state)
 {
@@ -48,7 +45,8 @@ int main(int argc, char **argv, char **envp)
         return (1);
     }
     
-    setup_signals();
+    init_signals();
+    disable_echoctl();
     while (1)
     {
         input = readline("🤖 minishell➤ ");
