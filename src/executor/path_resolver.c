@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path_resolver.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/20 15:00:49 by myda-chi          #+#    #+#             */
+/*   Updated: 2025/07/20 21:50:54 by myda-chi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "executor.h"
 #include "utils.h"
 
@@ -68,7 +80,7 @@ char *get_cmd_path(char **argv, t_shell_state *state)
             return (ft_strdup(cmd_path));
         }
         free(cmd_path);
-        free(paths[i]);
+        free(paths[i]); 
         i++;
     }
     free(paths);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/20 15:00:43 by myda-chi          #+#    #+#             */
+/*   Updated: 2025/07/20 20:38:12 by myda-chi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "executor.h"
 #include "utils.h"
 #include <fcntl.h>
@@ -9,7 +21,7 @@ static void	heredoc_signal_handler(int signum)
 	if (signum == SIGINT)
 	{
 		close(STDIN_FILENO);
-		g_heredoc_recieved =SIGINT;
+		g_heredoc_recieved = SIGINT;
 	}
 }
 

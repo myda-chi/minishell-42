@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   command_exec.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/20 15:00:22 by myda-chi          #+#    #+#             */
+/*   Updated: 2025/07/20 21:36:56 by myda-chi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "executor.h"
 #include "utils.h"
 #include <sys/wait.h>
@@ -51,7 +63,5 @@ void execute_simple_command(t_command *cmd, t_shell_state *state)
     if (pid == 0)
         handle_child_process(cmd, state);
     else
-    {
         handle_parent_process(pid, state);
-    }
 }

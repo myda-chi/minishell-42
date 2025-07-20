@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/20 15:01:59 by myda-chi          #+#    #+#             */
+/*   Updated: 2025/07/20 20:30:31 by myda-chi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include "parser.h"
 #include "executor.h"
@@ -27,6 +39,7 @@ void increment_shell_level(t_shell_state *state)
         free(new_level_str);
     } 
 }
+
 int main(int argc, char **argv, char **envp)
 {
     char *input;
@@ -44,7 +57,6 @@ int main(int argc, char **argv, char **envp)
         ft_putstr_fd("minishell: failed to initialize shell state\n", 2);
         return (1);
     }
-    
     init_signals();
     disable_echoctl();
     while (1)
@@ -71,3 +83,4 @@ int main(int argc, char **argv, char **envp)
     cleanup_shell_state(state);
     return (exit_status);
 }
+

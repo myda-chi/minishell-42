@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   executor_main.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/20 15:00:27 by myda-chi          #+#    #+#             */
+/*   Updated: 2025/07/20 21:23:19 by myda-chi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "executor.h"
 #include "utils.h"
 
@@ -15,15 +27,17 @@ static void handle_single_builtin(t_command *commands, t_shell_state *state)
     if (handle_redirections(commands) == -1)
     {
         set_exit_status_in_state(state, 1);
-        return;
+        return ;
     }
     status = execute_builtin(commands, state);
+    dup2(STDIN_FILENO, STDOUT_FILENO);
     set_exit_status_in_state(state, status);
 }
 
 static int is_single_builtin_command(t_command *commands)
 {
-    if (is_single_command(commands) && commands->argv && is_builtin(commands->argv[0]))
+    if (is_single_command(commands) && commands->argv
+            && is_builtin(commands->argv[0]))
         return (1);
     return (0);
 }
@@ -35,7 +49,7 @@ void execute(t_command *commands, t_shell_state *state)
     if (is_single_builtin_command(commands))
     {
         handle_single_builtin(commands, state);
-        return;
+        return ;
     }
     execute_pipeline(commands, state);
 }

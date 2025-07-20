@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirections.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/20 15:01:13 by myda-chi          #+#    #+#             */
+/*   Updated: 2025/07/20 21:20:51 by myda-chi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "executor.h"
 #include <fcntl.h>
 
@@ -22,7 +34,7 @@ static int process_input_redirection(t_in_redir *in)
 		else if (in->in_mode == 1)
 			in->in_fd = handle_heredoc(in->delimeter, 0);
 		else
-			in->in_fd = 0;
+			in->in_fd = STDIN_FILENO;
 		if (in->in_fd < 0)
 			return (-1);
 		if (in->next == NULL)
@@ -46,7 +58,7 @@ static int process_output_redirection(t_out_redir *out)
 		else if (out->out_mode == 1)
 			out->out_fd = open(out->out_file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		else
-			out->out_fd = 1;
+			out->out_fd = STDOUT_FILENO;
 		if (out->out_fd < 0)
 			return (perror("open"), -1);
 		if (out->next == NULL)
@@ -54,7 +66,7 @@ static int process_output_redirection(t_out_redir *out)
 		close(out->out_fd);
 		out = out->next;
 	}
-	if (my_dup2(out->out_fd, 1) != 0)
+	if (my_dup2(out->out_fd, STDOUT_FILENO) != 0)
 		return (-1);
 	return (0);
 }
