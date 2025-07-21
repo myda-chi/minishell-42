@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 19:28:01 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/14 22:34:10 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/21 16:56:39 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,23 @@ int	handle_double_quote(t_tokenizer *tokens, int start)
 		return (-1);
 	}
 	return (end);
+}
+
+void	free_tokens(t_tokenizer *tokens)
+{
+	t_token	*current;
+	t_token	*next;
+
+	if (!tokens)
+		return ;
+	current = tokens->head;
+	while (current)
+	{
+		next = current->next;
+		if (current->value)
+			free(current->value);
+		free(current);
+		current = next;
+	}
+	tokens->head = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 18:04:36 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/20 22:43:37 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/21 20:06:38 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*expand_variables(char *str, t_shell_state *state)
 		return (NULL);
 	i = 0;
 	if (str[i] == '$' && str[i + 1] && str[i + 1] == '$')
-		return ft_itoa(state->shell_pid); // to update with a function that attaches extra strings if available
+		return (ft_itoa(state->shell_pid)); // to update with a function that attaches extra strings if available
 	while (str[i])
 	{
 		if (str[i] == '$' && str[i + 1] && is_variable_char(str[i + 1]))

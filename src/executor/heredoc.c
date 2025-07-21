@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 15:00:43 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/20 20:38:12 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/21 18:41:40 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "utils.h"
 #include <fcntl.h>
 
-volatile sig_atomic_t g_heredoc_recieved = 0;
+volatile sig_atomic_t	g_heredoc_recieved = 0;
 
 static void	heredoc_signal_handler(int signum)
 {
@@ -31,9 +31,9 @@ static void	setup_heredoc_signals(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-static int create_temp_file(char *tmp_file)
+static int	create_temp_file(char *tmp_file)
 {
-	int fd;
+	int	fd;
 
 	fd = open(tmp_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
@@ -44,20 +44,20 @@ static int create_temp_file(char *tmp_file)
 	return (fd);
 }
 
-static void write_heredoc_content(int fd, char *delimiter)
+static void	write_heredoc_content(int fd, char *delimiter)
 {
-	char *line;
+	char	*line;
 
 	setup_heredoc_signals();
 	while (1)
 	{
 		line = readline("> ");
 		if (!line)
-			break;
+			break ;
 		if (ft_strcmp(line, delimiter) == 0)
 		{
 			free(line);
-			break;
+			break ;
 		}
 		ft_putendl_fd(line, fd);
 		free(line);
@@ -65,9 +65,9 @@ static void write_heredoc_content(int fd, char *delimiter)
 	close(fd);
 }
 
-int handle_heredoc(char *delimiter, int index)
+int	handle_heredoc(char *delimiter, int index)
 {
-	int fd;
+	int	fd;
 
 	(void)index;
 	fd = create_temp_file("/tmp/minishell_heredoc");
@@ -76,7 +76,7 @@ int handle_heredoc(char *delimiter, int index)
 	write_heredoc_content(fd, delimiter);
 	init_signals();
 	if (g_heredoc_recieved == SIGINT)
-		return(-1);
+		return (-1);
 	fd = open("/tmp/minishell_heredoc", O_RDONLY, 0644);
 	if (fd < 0)
 	{

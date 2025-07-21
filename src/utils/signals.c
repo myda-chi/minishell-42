@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 18:04:50 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/20 14:59:35 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/21 20:07:49 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static void	signal_handler(int signum)
 	}
 }
 
-void disable_echoctl(void)
+void	disable_echoctl(void)
 {
-	struct termios term;
+	struct termios	term;
 
 	tcgetattr(STDIN_FILENO, &term);
 	term.c_lflag &= ~ECHOCTL;
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
-  }
+}
 
 void	init_signals(void)
 {

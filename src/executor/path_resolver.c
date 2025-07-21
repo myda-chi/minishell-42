@@ -6,83 +6,65 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 15:00:49 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/20 21:50:54 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/21 19:07:33 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 #include "utils.h"
 
-static int check_direct_access(char *cmd)
+static int	check_direct_access(char *cmd)
 {
-    if (access(cmd, F_OK | X_OK) == 0)
-        return (1);
-    return (0);
+	if (access(cmd, F_OK | X_OK) == 0)
+		return (1);
+	return (0);
 }
 
-static char **get_path_directories(t_shell_state *state)
+static char	**get_path_directories(t_shell_state *state)
 {
-    char *path_env;
-    char **paths;
+	char	*path_env;
+	char	**paths;
 
-    path_env = get_env_value_from_state(state, "PATH");
-    if (!path_env)
-        return (NULL);
-    paths = ft_split(path_env, ':');
-    return (paths);
+	path_env = get_env_value_from_state(state, "PATH");
+	if (!path_env)
+		return (NULL);
+	paths = ft_split(path_env, ':');
+	return (paths);
 }
 
-static char *build_command_path(char *dir, char *cmd)
+char	*build_command_path(char *dir, char *cmd)
 {
-    char *path;
-    char *cmd_path;
+	char	*path;
+	char	*cmd_path;
 
-    path = ft_strjoin(dir, "/");
-    if (!path)
-        return (NULL);
-    cmd_path = ft_strjoin(path, cmd);
-    free(path);
-    return (cmd_path);
+	path = ft_strjoin(dir, "/");
+	if (!path)
+		return (NULL);
+	cmd_path = ft_strjoin(path, cmd);
+	free(path);
+	return (cmd_path);
 }
 
-static void free_paths_array(char **paths, int start)
+void	free_paths_array(char **paths, int start)
 {
-    while (paths[start])
-    {
-        free(paths[start]);
-        start++;
-    }
-    free(paths);
+	while (paths[start])
+	{
+		free(paths[start]);
+		start++;
+	}
+	free(paths);
 }
 
-char *get_cmd_path(char **argv, t_shell_state *state)
+char	*get_cmd_path(char **argv, t_shell_state *state)
 {
-    char **paths;
-    char *cmd_path;
-    int i;
+	char	**paths;
 
-    if (!argv || !argv[0])
-        return (NULL);
-    if (check_direct_access(argv[0]))
-        return (ft_strdup(argv[0]));
-    paths = get_path_directories(state);
-    if (!paths)
-        return (NULL);
-    i = 0;
-    while (paths[i])
-    {
-        cmd_path = build_command_path(paths[i], argv[0]);
-        if (cmd_path && access(cmd_path, F_OK | X_OK) == 0)
-        {
-            free_paths_array(paths, i);
-            free(argv[0]);
-            argv[0] = cmd_path;
-            return (ft_strdup(cmd_path));
-        }
-        free(cmd_path);
-        free(paths[i]); 
-        i++;
-    }
-    free(paths);
-    return (NULL);
+	if (!argv || !argv[0])
+		return (NULL);
+	if (check_direct_access(argv[0]))
+		return (ft_strdup(argv[0]));
+	paths = get_path_directories(state);
+	if (!paths)
+		return (NULL);
+	return (find_cmd_in_paths(paths, argv));
 }

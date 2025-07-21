@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 19:50:41 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/14 22:32:19 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/21 16:57:08 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_token	*handle_special_char(t_tokenizer *tokens)
 t_tokenizer	*tokenize(t_tokenizer *tokens)
 {
 	int	result;
-	
+
 	if (!tokens)
 		return (NULL);
 	while (skip_whitespace(tokens))
