@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 15:01:13 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/22 19:49:52 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/22 19:56:49 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,23 +99,4 @@ int	handle_redirections(t_command *cmd)
 	if (process_output_redirection(out) < 0)
 		return (-1);
 	return (0);
-}
-
-void	execute_pipeline(t_command *commands, t_shell_state *state)
-{
-	int			fd[2];
-	int			in_fd;
-	t_command	*current;
-
-	in_fd = 0;
-	current = commands;
-	init_signals_parent();
-	while (current)
-	{
-		if (launch_child_and_manage_pipe(current, state, &in_fd, fd) == -1)
-			return ;
-		current = current->next;
-	}
-	wait_for_all_children(state);
-	init_signals();
 }

@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:14:24 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/01/07 15:08:50 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/22 20:00:54 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,3 @@ int	ft_strlen(const char *s)
 	return (i);
 }
 
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	char *p = "hello";
-// 	printf("%d", ft_strlen(p));
-// 	printf("%lu", strlen(p));
-// }

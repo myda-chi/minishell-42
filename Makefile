@@ -28,7 +28,7 @@ EXECUTOR_SRCS = $(EXECUTOR_DIR)/executor_main.c $(EXECUTOR_DIR)/heredoc.c \
 				$(EXECUTOR_DIR)/redirections.c $(EXECUTOR_DIR)/builtin_check.c \
 				$(EXECUTOR_DIR)/builtin_exec.c $(EXECUTOR_DIR)/path_resolver.c \
 				$(EXECUTOR_DIR)/command_exec.c $(EXECUTOR_DIR)/external_exec.c \
-				$(EXECUTOR_DIR)/pipeline.c
+				$(EXECUTOR_DIR)/pipeline.c $(EXECUTOR_DIR)/pipeline_util.c
 
 BUILTINS_SRCS = $(BUILTINS_DIR)/ft_echo.c $(BUILTINS_DIR)/ft_cd.c $(BUILTINS_DIR)/ft_pwd.c \
 				$(BUILTINS_DIR)/ft_export.c $(BUILTINS_DIR)/ft_unset.c $(BUILTINS_DIR)/ft_env.c \
