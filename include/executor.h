@@ -29,5 +29,6 @@ int launch_child_and_manage_pipe(t_command *cmd, t_shell_state *state,
 /* Path resolution */
 char *get_cmd_path(char **argv, t_shell_state *state);
 char *find_cmd_in_paths(char **paths, char **argv);
+int my_open(char *filename);
 
 #endif 

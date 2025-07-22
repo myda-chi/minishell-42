@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 15:01:13 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/21 20:04:40 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/22 19:49:52 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,19 @@ int	my_dup2(int fd1, int fd2)
 	}
 	return (0);
 }
+int my_open(char *filename)
+{
+	int	fd;
 
+	if (!filename)
+		return(-1);
+	fd = open(filename, O_RDONLY, 0644);
+	if (fd < 0)
+	{
+		printf("minishell: %s: %s\n", filename, strerror(errno));
+	}
+	return(fd);
+}
 static int	process_input_redirection(t_in_redir *in)
 {
 	if (!in)
@@ -30,7 +42,7 @@ static int	process_input_redirection(t_in_redir *in)
 	while (in)
 	{
 		if (in->in_mode == 0)
-			in->in_fd = open(in->in_file, O_RDONLY, 0644);
+			in->in_fd = my_open(in->in_file);
 		else if (in->in_mode == 1)
 			in->in_fd = handle_heredoc(in->delimeter, 0);
 		else
