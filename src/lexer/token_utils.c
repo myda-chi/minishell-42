@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 19:50:36 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/21 16:57:30 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/23 17:08:23 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,5 @@ int	is_quote_char(char c)
 
 int	is_wrd_char(char c)
 {
-	return (!ft_isspace(c) && !is_special_char(c) && !is_quote_char(c));
+	return (!ft_isspace(c) && !is_special_char(c));
 }
