@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 21:40:13 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/13 21:40:23 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/23 16:45:27 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ static void	print_env_array(char **envp)
 	i = 0;
 	while (envp[i])
 	{
+		if (ft_strncmp(envp[i], "$=", 2) == 0
+				|| ft_strncmp(envp[i], "?=", 2) == 0)
+		{
+			i++;
+			continue;
+		}
 		ft_putendl_fd(envp[i], 1);
 		i++;
 	}

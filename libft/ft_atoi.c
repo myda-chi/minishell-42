@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:52:23 by myda-chi          #+#    #+#             */
-/*   Updated: 2024/12/30 15:13:33 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/23 15:07:53 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,3 @@ int	ft_atoi(const char *str)
 	}
 	return (num * sign);
 }
-
-// #include <stdio.h>
-// int main(void)
-// {
-//  printf("%d\n",ft_atoi("  3147483648887"));
-//  printf("%d", atoi("  3147483648887"));
-// }

@@ -68,14 +68,15 @@ static int	export_with_value(t_shell_state *state, char *arg)
 	return (0);
 }
 
-static int	export_without_value(t_shell_state *state, char *arg)
+
+
+static int export_without_value(char *arg)
 {
 	if (!validate_export_name(arg))
 	{
 		print_export_error(arg);
 		return (1);
 	}
-	set_env_value_in_state(state, arg, "");
 	return (0);
 }
 
@@ -100,7 +101,7 @@ int	ft_export(int argc, char **argv, t_shell_state *state)
 		}
 		else
 		{
-			if (export_without_value(state, argv[i]) != 0)
+			if (export_without_value(argv[i]) != 0)
 				exit_status = 1;
 		}
 		i++;

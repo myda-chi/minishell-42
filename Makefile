@@ -31,8 +31,8 @@ EXECUTOR_SRCS = $(EXECUTOR_DIR)/executor_main.c $(EXECUTOR_DIR)/heredoc.c \
 				$(EXECUTOR_DIR)/pipeline.c $(EXECUTOR_DIR)/pipeline_util.c
 
 BUILTINS_SRCS = $(BUILTINS_DIR)/ft_echo.c $(BUILTINS_DIR)/ft_cd.c $(BUILTINS_DIR)/ft_pwd.c \
-				$(BUILTINS_DIR)/ft_export.c $(BUILTINS_DIR)/ft_unset.c $(BUILTINS_DIR)/ft_env.c \
-				$(BUILTINS_DIR)/ft_exit.c $(BUILTINS_DIR)/builtin_utils.c $(BUILTINS_DIR)/export2.c
+				 $(BUILTINS_DIR)/ft_unset.c $(BUILTINS_DIR)/ft_env.c \
+				$(BUILTINS_DIR)/ft_exit.c $(BUILTINS_DIR)/builtin_utils.c $(BUILTINS_DIR)/export2.c $(BUILTINS_DIR)/export.c
 
 UTILS_SRCS = $(UTILS_DIR)/utils.c $(UTILS_DIR)/signals.c\
 			$(UTILS_DIR)/env_hash.c $(UTILS_DIR)/env_manager.c $(UTILS_DIR)/expansion.c\

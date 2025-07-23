@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 21:40:00 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/22 22:53:02 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/23 16:17:02 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,18 @@
 
 static int	check_n_flag(char *arg)
 {
-	return (ft_strncmp(arg, "-n", 2) == 0);// when echo -nnnnnnlcnfjd 5 it do not work
+	int i;
+
+	if (!arg || arg[0] != '-' || arg[1] =='\0')
+		return(0);
+	i = 1;
+	while(arg[i])
+	{
+		if (arg[i] !='n')
+			return(0);
+		i++;
+	}
+	return(1);
 }
 
 static void	print_arguments(int argc, char **argv, int start_index)

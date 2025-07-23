@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 18:04:25 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/20 20:17:01 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/23 15:44:08 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	cleanup_shell_state(t_shell_state *state)
 	free(state);
 }
 
-/* State-based Environment Management */
 char	*get_env_value_from_state(t_shell_state *state, const char *key)
 {
 	if (!state || !state->env_table)

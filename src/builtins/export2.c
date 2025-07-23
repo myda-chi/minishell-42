@@ -5,93 +5,106 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/13 21:39:45 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/13 22:00:09 by myda-chi         ###   ########.fr       */
+/*   Created: 2025/07/13 21:40:40 by myda-chi          #+#    #+#             */
+/*   Updated: 2025/07/23 16:40:43 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+#include "utils.h"
 
-int	count_env_vars(char **envp)
+static void	print_env_sorted(t_shell_state *state)
 {
-	int	count;
-
-	count = 0;
-	while (envp[count])
-		count++;
-	return (count);
-}
-
-char	**create_env_copy(char **envp, int count)
-{
+	char	**envp;
 	char	**sorted_env;
-	int		i;
+	int		count;
 
-	sorted_env = malloc(sizeof(char *) * (count + 1));
+	envp = get_env_array_from_state(state);
+	if (!envp)
+		return ;
+	count = count_env_vars(envp);
+	sorted_env = create_env_copy(envp, count);
 	if (!sorted_env)
-		return (NULL);
-	i = 0;
-	while (i < count)
 	{
-		sorted_env[i] = envp[i];
-		i++;
+		free_env_array(envp);
+		return ;
 	}
-	sorted_env[count] = NULL;
-	return (sorted_env);
+	sort_env_array(sorted_env, count);
+	print_declare_format(sorted_env, count);
+	free(sorted_env);
+	free(envp);
 }
 
-void	print_declare_format(char **sorted_env, int count)
+static char	*extract_key(char *arg, char *eq_pos)
 {
-	int	i;
-
-	i = 0;
-	while (i < count)
-	{
-		ft_putstr_fd("declare -x ", 1);
-		ft_putendl_fd(sorted_env[i], 1);
-		free(sorted_env[i]);
-		i++;
-	}
+	return (ft_substr(arg, 0, eq_pos - arg));
 }
 
-int	validate_export_name(char *name)
+static int	export_with_value(t_shell_state *state, char *arg)
+{
+	char	*eq_pos;
+	char	*key;
+	char	*value;
+
+	eq_pos = ft_strchr(arg, '=');
+	key = extract_key(arg, eq_pos);
+	if (!key)
+		return (1);
+	if (!validate_export_name(key))
+	{
+		print_export_error(key);
+		free(key);
+		return (1);
+	}
+	value = extract_value(eq_pos);
+	if (!value)
+	{
+		free(key);
+		return (1);
+	}
+	set_env_value_in_state(state, key, value);
+	free(key);
+	free(value);
+	return (0);
+}
+
+
+
+static int export_without_value(char *arg)
+{
+	if (!validate_export_name(arg))
+	{
+		print_export_error(arg);
+		return (1);
+	}
+	return (0);
+}
+
+int	ft_export(int argc, char **argv, t_shell_state *state)
 {
 	int	i;
+	int	exit_status;
 
-	if (!name || !name[0])
+	if (argc == 1)
+	{
+		print_env_sorted(state);
 		return (0);
-	if (!ft_isalpha(name[0]) && name[0] != '_')
-		return (0);
+	}
+	exit_status = 0;
 	i = 1;
-	while (name[i])
+	while (i < argc)
 	{
-		if (!ft_isalnum(name[i]) && name[i] != '_')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-void	sort_env_array(char **env_array, int count)
-{
-	char	*temp;
-	int		i;
-	int		j;
-
-	i = 0;
-	while (i < count - 1)
-	{
-		j = 0;
-		while (j < count - 1 - i)
+		if (ft_strchr(argv[i], '='))
 		{
-			if (ft_strcmp(env_array[j], env_array[j + 1]) > 0)
-			{
-				temp = env_array[j];
-				env_array[j] = env_array[j + 1];
-				env_array[j + 1] = temp;
-			}
-			j++;
+			if (export_with_value(state, argv[i]) != 0)
+				exit_status = 1;
+		}
+		else
+		{
+			if (export_without_value(argv[i]) != 0)
+				exit_status = 1;
 		}
 		i++;
 	}
+	return (exit_status);
 }
