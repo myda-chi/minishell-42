@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 15:01:05 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/22 20:37:55 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/24 20:22:53 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,19 @@ static int	create_pipe_if_needed(t_command *current, int *fd)
 
 static void	setup_child_pipes(int in_fd, int *fd, t_command *cmd)
 {
-    if (in_fd != 0 && cmd && cmd->in_redir == NULL)
-    {
-        dup2(in_fd, 0);
-        close(in_fd);
-    }
-    else if (in_fd != 0)
-        close(in_fd);
-    if (cmd->next)
-    {
-        dup2(fd[1], 1);
-        close(fd[0]);
-        close(fd[1]);
-    }
+	if (in_fd != 0 && cmd && cmd->in_redir == NULL)
+	{
+		dup2(in_fd, 0);
+		close(in_fd);
+	}
+	else if (in_fd != 0)
+		close(in_fd);
+	if (cmd->next)
+	{
+		dup2(fd[1], 1);
+		close(fd[0]);
+		close(fd[1]);
+	}
 }
 
 static void	cleanup_parent_pipes(int *in_fd, int *fd, t_command *current)

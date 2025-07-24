@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 21:40:40 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/23 18:30:04 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/24 20:21:10 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,15 @@ static int	export_with_value(t_shell_state *state, char *arg)
 	return (0);
 }
 
-
-
 static int	export_without_value(char *arg, t_shell_state *state)
 {
-    if (!validate_export_name(arg))
-    {
-        print_export_error(arg);
-        return (1);
-    }
-    set_env_value_in_state(state, arg, "_*_*_");
-    return (0);
+	if (!validate_export_name(arg))
+	{
+		print_export_error(arg);
+		return (1);
+	}
+	set_env_value_in_state(state, arg, "_*_*_");
+	return (0);
 }
 
 int	ft_export(int argc, char **argv, t_shell_state *state)

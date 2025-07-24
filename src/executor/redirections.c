@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 15:01:13 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/22 19:56:49 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/24 20:23:51 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,20 @@ int	my_dup2(int fd1, int fd2)
 	}
 	return (0);
 }
-int my_open(char *filename)
+int	my_open(char *filename)
 {
 	int	fd;
 
 	if (!filename)
-		return(-1);
+		return (-1);
 	fd = open(filename, O_RDONLY, 0644);
 	if (fd < 0)
 	{
 		printf("minishell: %s: %s\n", filename, strerror(errno));
 	}
-	return(fd);
+	return (fd);
 }
+
 static int	process_input_redirection(t_in_redir *in)
 {
 	if (!in)

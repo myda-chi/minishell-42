@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 21:39:45 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/23 18:52:09 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/24 20:20:57 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,29 +46,29 @@ static void	check(char *sorted, char *eq_pos)
 
 void	print_declare_format(char **sorted_env, int count)
 {
-    int		i;
-    char	*eq_pos;
+	int		i;
+	char	*eq_pos;
 
-    i = 0;
-    while (i < count)
-    {
-        if (ft_strncmp(sorted_env[i], "$=", 2) == 0
-                || ft_strncmp(sorted_env[i], "?=", 2) == 0)
-        {
-            i++;
-            continue;
-        }
-        eq_pos = ft_strchr(sorted_env[i], '=');
-        if (eq_pos && ft_strcmp(eq_pos + 1, "_*_*_") == 0)
+	i = 0;
+	while (i < count)
+	{
+		if (ft_strncmp(sorted_env[i], "$=", 2) == 0 || ft_strncmp(sorted_env[i],
+				"?=", 2) == 0)
+		{
+			i++;
+			continue ;
+		}
+		eq_pos = ft_strchr(sorted_env[i], '=');
+		if (eq_pos && ft_strcmp(eq_pos + 1, "_*_*_") == 0)
 			check(sorted_env[i], eq_pos);
-        else
-        {
-            ft_putstr_fd("declare -x ", 1);
-            ft_putendl_fd(sorted_env[i], 1);
-        }
-        free(sorted_env[i]);
-        i++;
-    }
+		else
+		{
+			ft_putstr_fd("declare -x ", 1);
+			ft_putendl_fd(sorted_env[i], 1);
+		}
+		free(sorted_env[i]);
+		i++;
+	}
 }
 
 int	validate_export_name(char *name)
