@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 13:05:38 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/01/07 11:35:36 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/25 21:10:16 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char			*str;
 	unsigned int	p;
 
-	p = ft_strlen(s);
 	i = 0;
+	p = ft_strlen(s);
 	if (start >= p)
 		return ((char *)ft_calloc(1, sizeof(char)));
 	if (start + len > p)
@@ -35,11 +35,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	str[i] = '\0';
 	return (str);
 }
-
-// #include <stdio.h>
-// int main()
-// {
-//     char ptr[]="hello yda42";
-//     int start=2;
-//     printf("%s", ft_substr(ptr, start, 8));
-// }

@@ -48,11 +48,11 @@ all: $(LIBFT) $(NAME)
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS)  -lcurses $(HISTORY) $(READLINE) $(LIBFT) -o $(NAME)
-
 # $(NAME): $(OBJS)
-# 	$(CC) $(CFLAGS) $(OBJS) -lncurses -lreadline -lhistory $(LIBFT) -o $(NAME)
+# 	$(CC) $(CFLAGS) $(OBJS)  -lcurses $(HISTORY) $(READLINE) $(LIBFT) -o $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -lncurses -lreadline -lhistory $(LIBFT) -o $(NAME)
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)

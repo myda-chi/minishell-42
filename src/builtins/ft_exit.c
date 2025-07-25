@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 21:40:26 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/13 21:41:45 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/25 22:30:51 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 static void	exit_with_status(t_shell_state *state, int status)
 {
 	set_exit_status_in_state(state, status);
-	exit(status);
 }
 
 static void	exit_numeric_error(t_shell_state *state)
@@ -34,16 +33,16 @@ static int	handle_numeric_argument(char *arg, t_shell_state *state)
 {
 	int	exit_code;
 
-	if (ft_str_is_numeric(arg))
-	{
-		exit_code = ft_atoi(arg);
-		exit_with_status(state, exit_code);
-	}
-	else
+	exit_code = ft_str_is_numeric(arg);
+	if (exit_code == 0)
 	{
 		exit_numeric_error(state);
 	}
-	return (0);
+	else
+	{
+		exit_with_status(state, exit_code);
+	}
+	return (exit_code);
 }
 
 int	ft_exit(int argc, char **argv, t_shell_state *state)

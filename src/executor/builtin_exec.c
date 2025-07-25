@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 15:00:14 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/21 17:00:01 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/25 22:29:08 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ static int	execute_exit_builtin(t_command *cmd, t_shell_state *state)
 
 int	execute_builtin(t_command *cmd, t_shell_state *state)
 {
+	int exit_status;
+
+	exit_status = 0;
 	if (ft_strcmp(cmd->argv[0], "echo") == 0)
 		return (execute_echo_builtin(cmd));
 	if (ft_strcmp(cmd->argv[0], "cd") == 0)
@@ -59,6 +62,11 @@ int	execute_builtin(t_command *cmd, t_shell_state *state)
 	if (ft_strcmp(cmd->argv[0], "env") == 0)
 		return (execute_env_builtin(cmd, state));
 	if (ft_strcmp(cmd->argv[0], "exit") == 0)
-		return (execute_exit_builtin(cmd, state));
+	{
+		exit_status = execute_exit_builtin(cmd, state);
+		cleanup_shell_state(state);
+		free_commands(cmd);
+		exit(exit_status);
+	}
 	return (-1);
 }

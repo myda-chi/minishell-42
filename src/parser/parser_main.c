@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 19:20:14 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/23 17:09:07 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/25 22:22:26 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_command	*parse_command(char *input, t_shell_state *state)
 	if (!tokenizer)
 		return (NULL);
 	tokenizer = tokenize(tokenizer);
+	free(input);
 	if (!tokenizer)
 		return (NULL);
 	commands = build_commands(tokenizer, state);

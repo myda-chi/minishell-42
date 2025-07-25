@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 15:01:59 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/22 18:31:20 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/25 22:22:19 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static void run_shell_loop(t_shell_state *state)
 				free_commands(cmd);
 			}
 		}
-		free(input);
 	}
 }
 

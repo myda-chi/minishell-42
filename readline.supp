@@ -1,0 +1,92 @@
+{
+   readline_leak_1
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:readline
+}
+
+{
+   readline_leak_2
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:realloc
+   ...
+   fun:readline
+}
+
+{
+   readline_leak_3
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   ...
+   fun:readline
+}
+
+{
+   readline_history_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:add_history
+}
+
+{
+   readline_history_leak_2
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:realloc
+   ...
+   fun:add_history
+}
+
+{
+   readline_completion_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:rl_complete*
+}
+
+{
+   readline_tilde_expand
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:tilde_expand
+}
+
+{
+   readline_filename_completion
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:rl_filename_completion_function
+}
+
+{
+   readline_clear_history
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:clear_history
+}
+
+{
+   readline_using_history
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:using_history
+}
+
+
+valgrind --suppressions=readline.supp --leak-check=full --leak-check=full --show-leak-kinds=all ./minishell

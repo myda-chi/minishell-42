@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 19:20:08 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/20 22:36:46 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/25 20:04:42 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,10 @@ int	process_word_token(t_command *cmd, int *i, t_token **current,
 	char	*expanded;
 	char	*unquoted;
 
-	expanded = expand_variables((*current)->value, state);
+	if (!(*current)->value)
+		expanded = NULL;
+	else
+		expanded = expand_variables((*current)->value, state);
 	if (expanded)
 	{
 		unquoted = remove_quotes(expanded);
