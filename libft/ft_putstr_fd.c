@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 19:04:55 by myda-chi          #+#    #+#             */
-/*   Updated: 2024/12/26 22:07:59 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 14:56:09 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,3 @@ void	ft_putstr_fd(char *s, int fd)
 		s++;
 	}
 }
-
-// #include <stdio.h>
-// int main()
-// {
-//     char p[]="";
-//     ft_putstr_fd(p, 1);
-// }

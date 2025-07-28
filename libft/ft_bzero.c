@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:24:34 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/01/07 15:18:15 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 14:52:50 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,3 @@ void	*ft_bzero(void *s, size_t n)
 	}
 	return (s);
 }
-
-// #include <stdio.h>
-// int main()
-// {
-//     char p[]="hello";
-//     printf("%s", ft_bzero(p, 2));
-// }

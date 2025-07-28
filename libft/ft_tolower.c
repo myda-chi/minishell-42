@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:16:04 by myda-chi          #+#    #+#             */
-/*   Updated: 2024/12/26 22:10:09 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 14:58:58 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,3 @@ int	ft_tolower(int i)
 		return (i + 32);
 	return (i);
 }
-
-// #include <stdio.h>
-// int main()
-// {
-//     printf("%c", ft_tolower('a'));
-// }

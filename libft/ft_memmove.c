@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:20:21 by myda-chi          #+#    #+#             */
-/*   Updated: 2024/12/30 14:18:08 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 14:55:38 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,3 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	}
 	return (dst);
 }
-
-// //  #include <stdio.h>
-// //  int main()
-// //  {
-// //     char s[]="abcdefghij";
-// //     char d[20];
-// //     printf("%s", ft_memmove(s +5, s, 3));
-//  }

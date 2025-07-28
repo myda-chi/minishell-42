@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/28 17:09:12 by myda-chi          #+#    #+#             */
+/*   Updated: 2025/07/28 17:25:47 by myda-chi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSER_H
 # define PARSER_H
 
@@ -6,13 +18,13 @@
 /* Token Types */
 typedef enum e_token_type
 {
-	WORD,          // Regular command or argument
-	PIPE,          // |
-	REDIR_IN,      // <
-	REDIR_OUT,     // > same as truncate
-	REDIR_APPEND,  // >>
-	REDIR_HEREDOC, // << ok
-	END            // End of input
+	WORD,
+	PIPE,
+	REDIR_IN,
+	REDIR_OUT,
+	REDIR_APPEND,
+	REDIR_HEREDOC,
+	END
 }					t_token_type;
 
 /* Token Structure */
@@ -39,9 +51,7 @@ t_tokenizer			*tokenize(t_tokenizer *tokens);
 void				free_tokens(t_tokenizer *tokens);
 
 /* Token Functions */
-t_token				*create_token(t_token_type type, char *value);
 void				add_token(t_tokenizer *tokens, t_token *new_token);
-t_token_type		get_special_token_type(char c, char next);
 
 /* Parser Functions */
 t_command			*build_simple_command(t_token **current,
@@ -100,4 +110,5 @@ char				*extract_special_token_value(t_tokenizer *tokens, int len);
 int					get_word_length(t_tokenizer *tokens);
 int					is_quote_char(char c);
 int					is_wrd_char(char c);
+
 #endif

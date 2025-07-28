@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:17:50 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/01/07 15:38:41 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 15:02:57 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,9 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	str[i] = '\0';
 	return (str);
 }
-char to_uppercase(unsigned int index, char c)
+
+char	to_uppercase(unsigned int index, char c)
 {
-    (void)index;
-	return(ft_toupper(c));
-}
-#include <stdio.h>
-int main()
-{
-    char ptr[]="hello";
-    printf("%s", ft_strmapi(ptr, to_uppercase));
+	(void)index;
+	return (ft_toupper(c));
 }

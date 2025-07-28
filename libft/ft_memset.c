@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:48:44 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/01/02 13:49:43 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 14:55:45 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,3 @@ void	*ft_memset(void *b, int c, size_t n)
 	}
 	return (b);
 }
-
-// #include <stdio.h>
-// int main()
-// {
-
-//     char b[]="hello";
-//     char c='a';
-//     printf("%s", ft_memset(b, c, 3));
-
-// }

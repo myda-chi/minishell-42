@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 19:41:49 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/01/02 14:47:09 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 14:53:55 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,3 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	else
 		*lst = new;
 }
-// int main()
-// {
-// 	t_list *first=ft_lstnew("hello");
-// 	t_list *second=ft_lstnew("you");
-// 	first->next=second;
-// 	t_list *third=ft_lstnew("world");
-// 	ft_lstadd_back(&first, third);
-// 	t_list *current=first;
-// 	while(current)
-// 	{
-// 		printf("%s", current->content);
-// 		current=current->next;
-// 	}
-
-// }

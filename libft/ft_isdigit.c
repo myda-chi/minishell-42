@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:31:23 by myda-chi          #+#    #+#             */
-/*   Updated: 2024/12/26 22:05:09 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 14:53:09 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,3 @@ int	ft_isdigit(int i)
 		return (1);
 	return (0);
 }
-
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	printf("%d", ft_isdigit(''));
-// }

@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:50:36 by myda-chi          #+#    #+#             */
-/*   Updated: 2024/12/28 19:08:50 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 14:57:29 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,3 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	dst[s + i] = '\0';
 	return (i + j);
 }
-
-// #include <stdio.h>
-// int main()
-// {
-//     char s[]="halo,you";
-//     char d[10]="hey";
-//     printf("%zu\n%s", ft_strlcat(d, s, 10), d);
-//     // printf("%zu\n", strlcat(d, s, 10));
-// }

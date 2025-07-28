@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 16:11:28 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/01/07 15:40:52 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 14:58:52 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,4 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (NULL);
 	ft_strlcpy(str, &s1[i], j - i + 1);
 	return (str);
-}
-
-int	main(void)
-{
-	char p[] = "lhello you evaluatorl";
-	char c[] = "*****";
-	char *ptr;
-	ptr = ft_strtrim(p, c);
-	if (ptr)
-	{
-		printf("%s", ptr);
-		free(ptr);
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 15:35:51 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/01/07 11:32:34 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 14:57:22 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	str[i + j] = '\0';
 	return (str);
 }
-
-// #include <stdio.h>
-// int main()
-// {
-//     char str1[];
-//     char str2[];
-//     printf("%s", ft_strjoin(str1, str2));
-// }

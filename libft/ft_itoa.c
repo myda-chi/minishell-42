@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:12:01 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/01/07 15:46:23 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 15:01:22 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ char	*ft_itoa(int n)
 	char			*str;
 	unsigned int	len;
 
-	
 	len = ft_get_lenght(n);
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (n == INT_MIN)

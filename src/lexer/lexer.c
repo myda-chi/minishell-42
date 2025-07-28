@@ -6,11 +6,13 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 19:45:54 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/28 14:48:42 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 17:08:06 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+t_token	*create_token(t_token_type type, char *value);
 
 int	add_end_token(t_tokenizer *tokens)
 {

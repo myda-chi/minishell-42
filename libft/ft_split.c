@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:28:49 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/01/07 15:44:39 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 14:56:24 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,18 +94,3 @@ char	**ft_split(char const *s, char c)
 	src[j] = NULL;
 	return (src);
 }
-
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	int i;
-// 	i=0;
-// 	char **strs=ft_split("5helloyoumy5", '5' );
-// 	while(strs[i])
-// 	{
-// 		printf("%s\n", strs[i]);
-// 		i++;
-// 	}
-// 	return (0);
-// }

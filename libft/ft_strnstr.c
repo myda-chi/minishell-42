@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:27:09 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/01/07 11:39:27 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 14:58:09 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,3 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	}
 	return (NULL);
 }
-
-// int	main(void)
-// {
-// 	char hey[] = "hello you happy";
-// 	char *need;
-// 	printf("%s", ft_strnstr(hey, need, 12));
-// }

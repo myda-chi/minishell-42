@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 19:00:18 by myda-chi          #+#    #+#             */
-/*   Updated: 2024/12/26 22:08:43 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 14:57:35 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,3 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	dst[i] = '\0';
 	return (len);
 }
-
-// #include <stdio.h>
-// int main()
-// {
-//     char s[]="hellop";
-//     char d[10];
-//     printf("%zu" "%s", ft_strlcpy(d, s, 4),d);
-// }
