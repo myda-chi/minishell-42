@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 15:01:59 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/28 17:13:03 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 20:00:42 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,20 @@ void	increment_shell_level(t_shell_state *state)
 	}
 }
 
+static int	is_only_whitespace(char *str)
+{
+    int	i;
+
+    i = 0;
+    while (str[i])
+    {
+        if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n' && str[i] != '\r')
+            return (0);
+        i++;
+    }
+    return (1);
+}
+
 static void	run_shell_loop(t_shell_state *state)
 {
 	char		*input;
@@ -51,7 +65,7 @@ static void	run_shell_loop(t_shell_state *state)
 			ft_putstr_fd("exit\n", 1);
 			break ;
 		}
-		if (ft_strlen(input) > 0)
+		if (ft_strlen(input) > 0 && !is_only_whitespace(input))
 		{
 			add_history(input);
 			cmd = parse_command(input, state);

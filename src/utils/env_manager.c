@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 18:04:25 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/28 14:50:36 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 19:45:28 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_shell_state	*init_shell_state(char **envp)
 	}
 	if (env_get(state->env_table, "OLDPWD"))
 		env_unset(state->env_table, "OLDPWD");
+	state->shell_pid = getpid();
 	state->exit_status = 0;
 	set_env_value_in_state(state, "?", "0");
 	pid_str = ft_itoa(state->shell_pid);
