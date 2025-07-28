@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 18:04:36 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/25 21:16:11 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 14:51:01 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,21 @@ static char	*handle_variable(char *result, char *str, int *i,
 
 static char	*handle_regular_char(char *result, char c)
 {
-    char	*temp;
-    char	*expanded;
-    char	str[2];
+	char	*temp;
+	char	*expanded;
+	char	str[2];
 
-    str[0] = c;
-    str[1] = '\0';
-    temp = ft_substr(str, 0, 1);
-    if (temp)
-    {
-        expanded = ft_strjoin(result, temp);
-        free(result);
-        free(temp);
-        return (expanded);
-    }
-    return (result);
+	str[0] = c;
+	str[1] = '\0';
+	temp = ft_substr(str, 0, 1);
+	if (temp)
+	{
+		expanded = ft_strjoin(result, temp);
+		free(result);
+		free(temp);
+		return (expanded);
+	}
+	return (result);
 }
 
 static int	is_variable_char(char c)

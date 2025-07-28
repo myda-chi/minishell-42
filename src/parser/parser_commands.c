@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 19:20:08 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/25 20:04:42 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 14:50:18 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_command	*build_simple_command(t_token **current, t_shell_state *state)
 int	populate_command_arguments(t_command *cmd, t_token **current,
 		t_shell_state *state)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (*current && (*current)->type != PIPE && (*current)->type != END)

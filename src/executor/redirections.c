@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 15:01:13 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/24 20:23:51 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 14:48:00 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	my_dup2(int fd1, int fd2)
 	}
 	return (0);
 }
+
 int	my_open(char *filename)
 {
 	int	fd;

@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 19:45:54 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/19 23:06:05 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 14:48:42 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ int	get_word_length(t_tokenizer *tokens)
 	int	start;
 
 	start = tokens->pos;
-	while (tokens->pos < tokens->len
-		&& is_wrd_char(tokens->input[tokens->pos]))
+	while (tokens->pos < tokens->len && is_wrd_char(tokens->input[tokens->pos]))
 		tokens->pos++;
 	return (tokens->pos - start);
 }

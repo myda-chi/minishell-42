@@ -6,7 +6,7 @@
 /*   By: myda-chi <myda-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 15:00:14 by myda-chi          #+#    #+#             */
-/*   Updated: 2025/07/25 22:29:08 by myda-chi         ###   ########.fr       */
+/*   Updated: 2025/07/28 14:52:02 by myda-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	execute_exit_builtin(t_command *cmd, t_shell_state *state)
 
 int	execute_builtin(t_command *cmd, t_shell_state *state)
 {
-	int exit_status;
+	int	exit_status;
 
 	exit_status = 0;
 	if (ft_strcmp(cmd->argv[0], "echo") == 0)
